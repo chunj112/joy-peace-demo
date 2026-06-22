@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/main.css?v=1.8.0" />
+    <link rel="stylesheet" href="../assets/css/main.css?v=1.8.3" />
   </head>
   <body>
 
@@ -34,7 +34,6 @@
             <a href="../services/manicure-pedicure.html" data-service-nav-link="../services/manicure-pedicure.html"><span>Manicure &amp; Pedicure</span></a>
             <a href="../services/nail-removal.html" data-service-nav-link="../services/nail-removal.html"><span>Removal</span></a>
             <a href="../services/eyelash-extensions.html" data-service-nav-link="../services/eyelash-extensions.html"><span>Eyelash Extensions</span></a>
-            <a href="../services/eyelash-infill.html" data-service-nav-link="../services/eyelash-infill.html"><span>Infill (After 2 Weeks)</span></a>
             <a href="../services/eyelashes-lift.html" data-service-nav-link="../services/eyelashes-lift.html"><span>Tinting / Lifting / Perm</span></a>
             <a href="../services/waxing.html" data-service-nav-link="../services/waxing.html"><span>Waxing</span></a>
           </div>
@@ -117,8 +116,8 @@
         <label class="booking-name">Full name<input name="name" type="text" autocomplete="name" required /></label>
         <label class="booking-phone">Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
         <label class="booking-email"><span class="field-label">Email</span><input name="email" type="email" autocomplete="email" /></label>
-        <label class="booking-service-field">Service<span class="select-wrap"><select name="service" data-booking-service required><option value="Full Set Acrylic">Full Set Acrylic</option><option value="Infill Acrylic">Infill Acrylic</option><option value="Dipping Powder (SNS)">Dipping Powder (SNS)</option><option value="Poly Gel &amp; Builder Gel">Poly Gel &amp; Builder Gel</option><option value="Manicure &amp; Pedicure">Manicure &amp; Pedicure</option><option value="Removal">Removal</option><option value="Eyelash Extensions">Eyelash Extensions</option><option value="Infill (After 2 Weeks)">Infill (After 2 Weeks)</option><option value="Tinting / Lifting / Perm">Tinting / Lifting / Perm</option><option value="Waxing">Waxing</option></select></span></label>
-        <label class="booking-specialist-field">Specialist <small>(optional)</small><span class="select-wrap"><select name="specialist" data-booking-specialist><option value="Any available specialist">Any available specialist</option><option value="Quyen Quyen">Quyen Quyen</option></select></span></label>
+        <fieldset class="booking-service-field booking-service-options" data-booking-service><legend>Services</legend><input type="hidden" name="service" value="" data-booking-service-output /><div class="booking-service-list"><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Full Set Acrylic" data-booking-service-option /><span>Full Set Acrylic</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Infill Acrylic" data-booking-service-option /><span>Infill Acrylic</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Dipping Powder (SNS)" data-booking-service-option /><span>Dipping Powder (SNS)</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Poly Gel &amp; Builder Gel" data-booking-service-option /><span>Poly Gel &amp; Builder Gel</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Manicure &amp; Pedicure" data-booking-service-option /><span>Manicure &amp; Pedicure</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Removal" data-booking-service-option /><span>Removal</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Eyelash Extensions" data-booking-service-option /><span>Eyelash Extensions</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Tinting / Lifting / Perm" data-booking-service-option /><span>Tinting / Lifting / Perm</span></label><label class="booking-service-option"><input type="checkbox" name="service_choice" value="Waxing" data-booking-service-option /><span>Waxing</span></label></div></fieldset>
+        <label class="booking-specialist-field">Specialist <small>(optional)</small><span class="select-wrap"><select name="specialist" data-booking-specialist><option value="Any available specialist">Any available specialist</option><option value="Quyen Nguyen">Quyen Nguyen</option></select></span></label>
         <label class="booking-date">Preferred day<span class="select-wrap"><select name="day" data-booking-day required><option value="">Select an opening day</option><option value="Monday - 09:00-18:00">Monday - 09:00-18:00</option><option value="Tuesday - 09:00-18:00">Tuesday - 09:00-18:00</option><option value="Wednesday - 09:00-18:00">Wednesday - 09:00-18:00</option><option value="Thursday - 09:00-18:00">Thursday - 09:00-18:00</option><option value="Friday - 09:00-18:00">Friday - 09:00-18:00</option><option value="Saturday - 09:00-18:00">Saturday - 09:00-18:00</option><option value="Sunday - 10:00-17:00">Sunday - 10:00-17:00</option></select></span></label>
         <label class="booking-time">Preferred time<input name="time" type="text" placeholder="Example: 10:30 AM" required /></label>
         <label class="booking-notes">Notes<textarea name="notes" rows="3" placeholder="Tell us anything helpful"></textarea></label>
@@ -127,6 +126,6 @@
       </form>
     </div>
     <script>window.JPN_CONTACT_EMAIL = "joyandpeacenailspa@gmail.com";</script>
-    <script src="../assets/js/main.js?v=1.8.0"></script>
+    <script src="../assets/js/main.js?v=1.8.3"></script>
   </body>
 </html>

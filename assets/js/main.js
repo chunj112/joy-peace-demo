@@ -13,6 +13,8 @@ const chatToggle = document.querySelector("[data-chat-toggle]");
 const bookingModal = document.querySelector("[data-booking-modal]");
 const bookingForm = document.querySelector("[data-booking-form]");
 const bookingService = document.querySelector("[data-booking-service]");
+const bookingServiceOutput = document.querySelector("[data-booking-service-output]");
+const bookingServiceOptions = [...document.querySelectorAll("[data-booking-service-option]")];
 const bookingStatus = document.querySelector("[data-booking-status]");
 
 const serviceInteractionState = { pausedUntil: 0, resetTimer: 0 };
@@ -331,8 +333,12 @@ const openBookingModal = (serviceTitle = "") => {
 
   lastFocusedBeforeModal = document.activeElement;
 
-  if (bookingService && serviceTitle) {
-    bookingService.value = serviceTitle;
+  if (bookingServiceOptions.length && serviceTitle) {
+    bookingServiceOptions.forEach((option) => {
+      option.checked = option.value === serviceTitle;
+      option.setCustomValidity("");
+    });
+    syncBookingServices();
   }
 
   setBookingStatus("", "");
@@ -360,15 +366,34 @@ const setBookingStatus = (message = "", type = "") => {
   bookingStatus.dataset.status = type;
 };
 
+const getSelectedBookingServices = () => bookingServiceOptions.filter((option) => option.checked).map((option) => option.value);
+
+const syncBookingServices = ({ validate = false } = {}) => {
+  const selectedServices = getSelectedBookingServices();
+  const serviceValue = selectedServices.join(", ");
+
+  if (bookingServiceOutput) {
+    bookingServiceOutput.value = serviceValue;
+  }
+
+  const firstOption = bookingServiceOptions[0];
+  if (firstOption) {
+    firstOption.setCustomValidity(validate && !selectedServices.length ? "Please select at least one service." : "");
+  }
+
+  return selectedServices;
+};
+
 const buildBookingMailto = (formData) => {
   const email = window.JPN_BOOKING_CONFIG?.email || window.JPN_CONTACT_EMAIL || "joyandpeacenailspa@gmail.com";
-  const subject = encodeURIComponent(`Booking request - ${formData.get("service")}`);
+  const serviceValue = formData.get("service") || formData.getAll("service_choice").join(", ");
+  const subject = encodeURIComponent(`Booking request - ${serviceValue}`);
   const body = encodeURIComponent(
     [
       `Name: ${formData.get("name")}`,
       `Phone: ${formData.get("phone")}`,
       `Email: ${formData.get("email") || "Not provided"}`,
-      `Service: ${formData.get("service")}`,
+      `Service: ${serviceValue}`,
       `Specialist: ${formData.get("specialist") || "Any available specialist"}`,
       `Preferred day: ${formData.get("day") || "Not provided"}`,
       `Preferred time: ${formData.get("time") || "Not provided"}`,
@@ -393,6 +418,10 @@ const bindBooking = () => {
     button.addEventListener("click", closeBookingModal);
   });
 
+  bookingServiceOptions.forEach((option) => {
+    option.addEventListener("change", () => syncBookingServices());
+  });
+
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && bookingModal.classList.contains("is-open")) {
       closeBookingModal();
@@ -404,6 +433,7 @@ const bindBooking = () => {
 
   bookingForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    syncBookingServices({ validate: true });
     if (!bookingForm.reportValidity()) return;
 
     const formData = new FormData(bookingForm);
